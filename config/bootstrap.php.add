@@ -1,0 +1,3 @@
+<?php
+//for admin controller
+Configure::write('Routing.prefixes', array('admin'));

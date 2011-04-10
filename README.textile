@@ -1,0 +1,34 @@
+h1. CsvIoBehavior for CakePHP
+
+h2. Usage
+
+* copy into CakePHP application dir
+* edit this behavior file if you want to customize csv dirs
+** default: [import] config/schema/csv/ | [export] config/schema/csv/export/
+* attach behavior on model
+
+h2. Methods
+
+* importCsv
+* exportCsv
+
+h2. Sample Controller
+
+h3. Usage
+
+* add following line on your bootstrap.php
+
+<pre>
+Configure::write('Routing.prefixes', array('admin'));
+</pre>
+
+* access path 'admin/csv/'
+
+h3. Actions
+
+* import
+** import data given 1st param tablename
+* import_all
+** import all data from existing csv files (default: config/schema/csv/)
+* export_all
+** export all data to csv files (default: config/schema/csv/export/)
