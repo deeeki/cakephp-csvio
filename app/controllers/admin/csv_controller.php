@@ -13,7 +13,7 @@ class CsvController extends AppController {
 		$html = new HtmlHelper();
 
 		echo $html->link('import_all') . "<br />\n";
-		foreach(glob(CONFIGS . 'schema' . DS . 'csv' . DS . '*.csv') as $file) {
+		foreach(glob(CONFIGS . 'csv' . DS . '*.csv') as $file) {
 			$table = basename($file, '.csv');
 			echo $html->link($table, 'import/' . $table) . "<br />\n";
 		}
@@ -30,7 +30,7 @@ class CsvController extends AppController {
 	}
 
 	public function admin_import_all() {
-		foreach(glob(CONFIGS . 'schema' . DS . 'csv' . DS . '*.csv') as $file) {
+		foreach(glob(CONFIGS . 'csv' . DS . '*.csv') as $file) {
 			$model = Inflector::classify(basename($file, '.csv'));
 			$this->loadModel($model);
 			$this->$model->Behaviors->attach('CsvIo');

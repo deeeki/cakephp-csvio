@@ -8,8 +8,8 @@ class CsvIoBehavior extends ModelBehavior {
 	private $__config;
 
 	public function setup(&$Model, $config = array()) {
-		$this->__config[$Model->alias]['importDir'] = CONFIGS . 'schema' . DS . 'csv' . DS;
-		$this->__config[$Model->alias]['exportDir'] = CONFIGS . 'schema' . DS . 'csv' . DS . 'export' . DS;
+		$this->__config[$Model->alias]['importDir'] = CONFIGS . 'csv' . DS;
+		$this->__config[$Model->alias]['exportDir'] = TMP . 'csv' . DS;
 
 		if ($config && is_array($config)) {
 			foreach ($config as $key => $value) {
@@ -18,10 +18,6 @@ class CsvIoBehavior extends ModelBehavior {
 				}
 			}
 		}
-
-		if (!file_exists($this->__config[$Model->alias]['exportDir'])) {
-			mkdir($this->__config[$Model->alias]['exportDir']);
-		}
 	}
 
 	public function importCsv(&$Model, $isUpdate = true) {
@@ -29,7 +25,7 @@ class CsvIoBehavior extends ModelBehavior {
 		$file = $this->__config[$Model->alias]['importDir'] . $table . '.csv';
 
 		if (!file_exists($file)) {
-			throw new Exception('File Not Found ' . $file);
+			throw new Exception('File not found. : ' . $file);
 		}
 
 		if (!$isUpdate) {
@@ -70,8 +66,8 @@ class CsvIoBehavior extends ModelBehavior {
 		$table = Inflector::tableize($Model->name);
 		$file = $this->__config[$Model->alias]['exportDir'] . $table . '.csv';
 
-		if (!file_exists($this->__config[$Model->alias]['exportDir'])) {
-			throw new Exception('Directory Not Found ' . $this->__config[$Model->alias]['exportDir']);
+		if (!is_writable($this->__config[$Model->alias]['exportDir'])) {
+			throw new Exception('Permission denied or directory not found. : ' . $this->__config[$Model->alias]['exportDir']);
 		}
 
 		$rows = array();

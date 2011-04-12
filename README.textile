@@ -1,15 +1,20 @@
 h1. CsvIoBehavior for CakePHP
 
+Optimized for Windows baker.
+Enabled editing CSV on Microsoft Office Excel.
+
 h2. Usage
 
 * copy into CakePHP application dir
 * edit this behavior file if you want to customize csv dirs
-** default: [import] config/schema/csv/ | [export] config/schema/csv/export/
+** default: [import] config/csv/ | [export] tmp/csv/
+* change the permission of export directory to writable
 * attach behavior on model
 
 h2. Methods
 
 * importCsv
+** when given 1st arg false, truncate table before importing
 * exportCsv
 
 h2. Sample Controller
@@ -29,6 +34,6 @@ h3. Actions
 * import
 ** import data given 1st param tablename
 * import_all
-** import all data from existing csv files (default: config/schema/csv/)
+** import all data from existing csv files (default: config/csv/)
 * export_all
-** export all data to csv files (default: config/schema/csv/export/)
+** export all data to csv files (default: tmp/csv/)
